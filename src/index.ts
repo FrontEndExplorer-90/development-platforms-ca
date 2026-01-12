@@ -1,5 +1,7 @@
 import express from "express";
 import productsRouter from "./routes/productsRoutes.js";
+import { pool } from "./db/pool.js";
+
 
 type ApiError = {
   status?: number;
@@ -80,6 +82,15 @@ app.get("/admin", checkAuth, (req, res) => {
   res.json({ message: "Admin: welcome, mighty one" });
 });
 
+app.get("/health/db", async (req, res, next) => {
+  try {
+    const [rows] = await pool.query("SELECT 1 AS ok");
+    res.json({ ok: true, rows });
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 app.use("/products", checkAuth, productsRouter);
 
@@ -119,3 +130,5 @@ app.use(
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
+
