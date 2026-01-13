@@ -1,6 +1,8 @@
+import "dotenv/config";
 import express from "express";
 import productsRouter from "./routes/productsRoutes.js";
 import { pool } from "./db/pool.js";
+import authRouter from "./routes/authRoutes.js";
 
 
 type ApiError = {
@@ -93,6 +95,8 @@ app.get("/health/db", async (req, res, next) => {
 
 
 app.use("/products", checkAuth, productsRouter);
+app.use("/auth", authRouter);
+
 
 // ====== 404 handler ======
 app.use((req, res) => {
