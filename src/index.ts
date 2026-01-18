@@ -3,6 +3,7 @@ import express from "express";
 import productsRouter from "./routes/productsRoutes.js";
 import { pool } from "./db/pool.js";
 import authRouter from "./routes/authRoutes.js";
+import articlesRouter from "./routes/articlesRoutes.js";
 
 
 type ApiError = {
@@ -42,24 +43,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// 4) Auth middleware (simple Bearer token check)
-function checkAuth(
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) {
-  const authHeader = req.header("Authorization");
-
-  if (!authHeader) {
-    return res.status(401).json({ error: "Missing Authorization header" });
-  }
-
-  if (authHeader !== "Bearer letmein") {
-    return res.status(403).json({ error: "Invalid token" });
-  }
-
-  next();
-}
 
 // Parse JSON bodies
 app.use(express.json());
@@ -71,19 +54,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello world!" });
 });
 
-// Public / protected demo routes
-app.get("/public", (req, res) => {
-  res.json({ message: "Public: anyone can access this." });
-});
-
-app.get("/protected", checkAuth, (req, res) => {
-  res.json({ message: "Protected: you have access" });
-});
-
-app.get("/admin", checkAuth, (req, res) => {
-  res.json({ message: "Admin: welcome, mighty one" });
-});
-
 app.get("/health/db", async (req, res, next) => {
   try {
     const [rows] = await pool.query("SELECT 1 AS ok");
@@ -93,9 +63,14 @@ app.get("/health/db", async (req, res, next) => {
   }
 });
 
+app.get("/debug/db", async (req, res) => {
+  const [rows] = await pool.query("SELECT DATABASE() AS db");
+  res.json(rows);
+});
 
-app.use("/products", checkAuth, productsRouter);
+app.use("/products", productsRouter);
 app.use("/auth", authRouter);
+app.use("/articles", articlesRouter);
 
 
 // ====== 404 handler ======
