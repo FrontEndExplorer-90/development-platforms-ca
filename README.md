@@ -110,3 +110,4 @@ The most challenging part of this assignment was configuring and troubleshooting
 This project highlighted the benefits of developing a custom API, such as flexibility and full control over authentication and data handling, compared to using a backend-as-a-service solution like Supabase. At the same time, it also demonstrated how SaaS solutions can reduce setup complexity and speed up development.
 
 Overall, this assignment strengthened my backend development skills and provided valuable insight into building and maintaining a self-hosted API.
+Also i want to add that in a production environment, additional measures such as rate limiting and request throttling would be important to further secure the API against abuse.
