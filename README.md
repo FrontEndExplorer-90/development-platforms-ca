@@ -1,9 +1,8 @@
 # Development Platforms – Course Assignment
+This project is an Express.js API built as part of the Development Platforms course assignment. 
+The project shows basic backend development concepts such as authentication, database integration, 
+and API structuring using the knowledge I’ve learned so far.
 
-This project is an **Express.js API** built as part of the **Development Platforms** course assignment.  
-The application functions as a simple news platform where users can browse news articles, and authenticated users can submit new articles.
-
-The project demonstrates core backend development concepts such as authentication, database integration, and API structuring using modern development practices.
 
 ---
 
@@ -19,7 +18,7 @@ The project demonstrates core backend development concepts such as authenticatio
 
 ---
 
-## Installation & Setup
+## Installation and Setup
 
 ### 1. Clone the repository
 ```bash
@@ -51,8 +50,8 @@ JWT_EXPIRES_IN=1h
 
 ### 4. Database Setup
 
-The project includes an exported MySQL database file named database.sql.
-To set up the database, run the following commands in MySQL:
+This project includes an exported MySQL database file named database.sql. 
+To set up the database, you need to run the following commands in MySQL:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS development_platforms_ca;
@@ -81,33 +80,39 @@ http://localhost:3000
 Authentication
 
 POST /auth/register
-Registers a new user using email and password.
+(this will register a new user using email and password.)
 
 POST /auth/login
-Logs in a user and returns a JWT.
+(this will log in a user and return a JWT.)
 
 Articles
 
 GET /articles
-Public endpoint that returns a list of all articles.
+(this is the public endpoint that returns a list of all articles.)
 
 POST /articles
-Protected endpoint that allows authenticated users to submit a new article.
-Requires a valid JWT in the Authorization header.
+(this is a protected endpoint that allows authenticated users to submit a new article, 
+but it requires a valid JWT in the Authorisation header.)
 
 ---
 
 ## Motivation
-I chose the Express.js API option because I wanted to focus on backend development and gain more experience working with authentication, databases, and API structure. Building a server-side application from scratch allowed me to better understand how different backend components interact in a real-world scenario.
+I went for Option 1,  because I wanted to learn more about backend development and get more experience with authentication, databases, and API structure.
+Building a server-side application from start to finish gave me a better understanding of how different backend components work together.
 
-I particularly enjoyed implementing JWT authentication and organising the code using controllers, routes, and middleware. Seeing the full flow - from user registration to protected endpoints - working correctly was very rewarding.
+I also really enjoyed implementing JWT authentication and organising the code using controllers, routes, and middleware. 
+Seeing the whole process, from user registration to protected endpoints, working correctly was actually kind of fun.
+
 
 ---
 
 ## Reflection
-The most challenging part of this assignment was configuring and troubleshooting MySQL on a Windows environment, especially when dealing with database connection issues and recovery. While this was frustrating at times, resolving these problems gave me a much deeper understanding of how databases and backend services operate.
+I feel like the hardest part of this assignment was configuring and troubleshooting MySQL , especially when dealing with database connection issues and recovery.
+(I still had credentials from when I studied NIS, so removing those and reconnecting everything took time) 
+I really wanted to throw in the towel several times, but solving these problems gave me a much deeper understanding of how databases and backend services work.
+This course showed me the benefits of developing a custom API, such as flexibility and full control over authentication and data handling, compared to using a backend-as-a-service solution like Supabase. 
+At the same time, it also demonstrated how SaaS solutions can reduce setup complexity and speed up development.
 
-This project highlighted the benefits of developing a custom API, such as flexibility and full control over authentication and data handling, compared to using a backend-as-a-service solution like Supabase. At the same time, it also demonstrated how SaaS solutions can reduce setup complexity and speed up development.
-
-Overall, this assignment strengthened my backend development skills and provided valuable insight into building and maintaining a self-hosted API.
+Overall, this assignment made my backend development skills better and gave me valuable insight into building and maintaining a self-hosted API.
 Also i want to add that in a production environment, additional measures such as rate limiting and request throttling would be important to further secure the API against abuse.
+
